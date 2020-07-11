@@ -921,7 +921,13 @@ class Client {
      * @return \Twilio\InstanceContext The requested context
      * @throws TwilioException For unknown contexts
      */
+    
     public function __call(string $name, array $arguments) {
+        
+        if (ucfirst($name) =='Sid') {
+            $name='AccountSid';
+        }
+        
         $method = 'context' . \ucfirst($name);
         if (\method_exists($this, $method)) {
             return \call_user_func_array([$this, $method], $arguments);
